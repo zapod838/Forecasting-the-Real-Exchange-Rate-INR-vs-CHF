@@ -45,3 +45,7 @@ Master_df['Log_CPI_Foreign'] = np.log(Master_df['CPI_Foreign'])
 
 Master_df.head()  # Display the first few rows of the dataset to check the calculation
 
+# PART_D
+# Analyze the properties of these variables (e.g., trends, seasonality, stationarity).
+# For stationarity testing, we can use the Augmented Dickey-Fuller (ADF) test.
+
