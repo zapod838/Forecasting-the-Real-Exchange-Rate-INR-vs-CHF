@@ -48,4 +48,31 @@ Master_df.head()  # Display the first few rows of the dataset to check the calcu
 # PART_D
 # Analyze the properties of these variables (e.g., trends, seasonality, stationarity).
 # For stationarity testing, we can use the Augmented Dickey-Fuller (ADF) test.
+import matplotlib.pyplot as plt
+from statsmodels.tsa.stattools import adfuller
 
+# Function to perform Augmented Dickey-Fuller test
+def adf_test(series, title=''):
+    result = adfuller(series, autolag='AIC')
+    output = {'Test Statistic': result[0], 'p-value': result[1], 
+              'Lags Used': result[2], 'Number of Observations Used': result[3]}
+    for key, value in result[4].items():
+        output[f'Critical Value ({key})'] = value
+    print(title)
+    print('--------------------------------------')
+    for key, value in output.items():
+        print(f'{key}: {value:.4f}')
+    print('\n')
+
+# Plotting the series and performing ADF test
+plt.figure(figsize=(12, 8))
+
+variables = ['Log_Nominal_Exchange_Rate', 'Log_Real_Exchange_Rate', 'Log_CPI_Home', 'Log_CPI_Foreign']
+
+for i, var in enumerate(variables, 1):
+    plt.subplot(2, 2, i)
+    Master_df[var].plot(title=var)
+    plt.tight_layout()
+    adf_test(Master_df[var], title=var)
+
+plt.show()
