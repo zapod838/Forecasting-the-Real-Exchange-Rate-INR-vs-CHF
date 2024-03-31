@@ -33,7 +33,7 @@ monthly_data.to_excel(excel_file_name, index=False)  # Set index=False to not sa
 print(f'Data saved to {excel_file_name}')
 
 #Import master file
-Master_df = pd.read_csv("Master_Excel")
+Master_df = pd.read_excel('Master Excel.xls')
 Master_df.head()
 
 #PART_C
