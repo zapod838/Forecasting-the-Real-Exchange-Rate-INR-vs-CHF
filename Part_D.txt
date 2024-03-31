@@ -1,4 +1,5 @@
-The Augmented Dickey-Fuller (ADF) test is used to determine whether a time series is stationary or has a unit root, which implies non-stationarity. The null hypothesis of the ADF test is that the time series has a unit root (and is thus non-stationary). If we can reject the null hypothesis, it suggests that the time series is stationary.
+The Augmented Dickey-Fuller (ADF) test is used to determine whether a time series is stationary or has a unit root, which implies non-stationarity. 
+The null hypothesis of the ADF test is that the time series has a unit root (and is thus non-stationary). If we can reject the null hypothesis, it suggests that the time series is stationary.
 
 Here's how you interpret the ADF test results for each variable:
 
@@ -6,26 +7,32 @@ Here's how you interpret the ADF test results for each variable:
    - ADF Test Statistic: -0.7020
    - p-value: 0.8462
    - Critical Values: -3.4825 (1%), -2.8844 (5%), -2.5790 (10%)
-   - Interpretation: The test statistic is not lower than any of the critical values, and the p-value is quite high (above 0.05). This suggests that we cannot reject the null hypothesis, and the Log Nominal Exchange Rate time series appears to be non-stationary.
+   - Interpretation: The test statistic is not lower than any of the critical values, and the p-value is quite high (above 0.05). 
+This suggests that we cannot reject the null hypothesis, and the Log Nominal Exchange Rate time series appears to be non-stationary.
 
 2. **Log Real Exchange Rate**:
    - ADF Test Statistic: -0.6028
    - p-value: 0.8703
    - Critical Values: -3.4817 (1%), -2.8840 (5%), -2.5788 (10%)
-   - Interpretation: Similar to the Log Nominal Exchange Rate, the test statistic is above the critical values, and the p-value is high. This indicates that the Log Real Exchange Rate time series is likely non-stationary as well.
+   - Interpretation: Similar to the Log Nominal Exchange Rate, the test statistic is above the critical values, and the p-value is high. 
+This indicates that the Log Real Exchange Rate time series is likely non-stationary as well.
 
 3. **Log CPI Home**:
    - ADF Test Statistic: -0.1318
    - p-value: 0.9462
    - Critical Values: -3.4842 (1%), -2.8851 (5%), -2.5794 (10%)
-   - Interpretation: The test statistic is not close to the critical values, and the p-value is very high. Therefore, the Log CPI Home time series is also considered non-stationary.
+   - Interpretation: The test statistic is not close to the critical values, and the p-value is very high. 
+Therefore, the Log CPI Home time series is also considered non-stationary.
 
 4. **Log CPI Foreign**:
    - ADF Test Statistic: -1.1901
    - p-value: 0.6778
    - Critical Values: -3.4870 (1%), -2.8864 (5%), -2.5800 (10%)
-   - Interpretation: Once again, the test statistic does not fall below the critical values and the p-value is not low enough to reject the null hypothesis, suggesting that the Log CPI Foreign time series is non-stationary.
+   - Interpretation: Once again, the test statistic does not fall below the critical values and the p-value is not low enough to reject the null hypothesis, 
+suggesting that the Log CPI Foreign time series is non-stationary.
 
-In all cases, the time series data for the logs of nominal exchange rate, real exchange rate, CPI home, and CPI foreign do not appear to be stationary based on the ADF test results. For such non-stationary series, differencing or transformation may be necessary before further analysis or modeling.
+In all cases, the time series data for the logs of nominal exchange rate, real exchange rate, CPI home, 
+and CPI foreign do not appear to be stationary based on the ADF test results. For such non-stationary series, differencing or transformation may be necessary before further analysis or modeling.
 
-These results also have implications for economic analysis. Non-stationary data can lead to spurious regression results if not properly handled, and it may indicate that the series is influenced by trends, cycles, or other non-stationary behaviors over time.
+These results also have implications for economic analysis. Non-stationary data can lead to spurious regression results if not properly handled,
+and it may indicate that the series is influenced by trends, cycles, or other non-stationary behaviors over time.
