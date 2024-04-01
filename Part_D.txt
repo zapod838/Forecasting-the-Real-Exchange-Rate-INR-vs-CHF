@@ -1,5 +1,6 @@
 The Augmented Dickey-Fuller (ADF) test is used to determine whether a time series is stationary or has a unit root, which implies non-stationarity. 
-The null hypothesis of the ADF test is that the time series has a unit root (and is thus non-stationary). If we can reject the null hypothesis, it suggests that the time series is stationary.
+The null hypothesis of the ADF test is that the time series has a unit root (and is thus non-stationary). If we can reject the null hypothesis, 
+it suggests that the time series is stationary.
 
 Here's how you interpret the ADF test results for each variable:
 
