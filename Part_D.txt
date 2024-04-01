@@ -37,3 +37,73 @@ and CPI foreign do not appear to be stationary based on the ADF test results. Fo
 
 These results also have implications for economic analysis. Non-stationary data can lead to spurious regression results if not properly handled,
 and it may indicate that the series is influenced by trends, cycles, or other non-stationary behaviors over time.
+
+
+Given that the ADF test results indicate all the log-transformed series are non-stationary (since the test statistics are greater than the critical values, and the p-values are above the typical significance level of 0.05), we can't perform tests on the levels of the data for absolute or relative PPP directly. We need to address the non-stationarity first.
+
+### For Absolute PPP:
+
+The absolute form of PPP suggests that the real exchange rate should be stationary. Since your real exchange rate is non-stationary, you could:
+
+1. **Differencing**: Create a first-differenced series of the real exchange rate and then re-run the ADF test to check for stationarity.
+2. **Cointegration Test**: If the nominal exchange rate and price levels (CPIs) are both I(1), you could check for cointegration between them.
+
+### For Relative PPP:
+
+The relative form of PPP relates to the changes in the exchange rate and changes in price levels. So, you would:
+
+1. **Differencing**: Create a first-differenced series for the nominal exchange rate and CPI, and then check if the changes in the exchange rate are explained by the changes in the relative CPIs through a regression model.
+
+### Step-by-Step Approach
+
+**Step 1: Differencing the series**
+
+You would first difference all series and then check for stationarity again with the ADF test. 
+
+```python
+Master_df['diff_Log_Nominal_Exchange_Rate'] = Master_df['Log_Nominal_Exchange_Rate'].diff().dropna()
+Master_df['diff_Log_Real_Exchange_Rate'] = Master_df['Log_Real_Exchange_Rate'].diff().dropna()
+Master_df['diff_Log_CPI_Home'] = Master_df['Log_CPI_Home'].diff().dropna()
+Master_df['diff_Log_CPI_Foreign'] = Master_df['Log_CPI_Foreign'].diff().dropna()
+```
+
+**Step 2: ADF test after differencing**
+
+Re-run the ADF test on the differenced series to see if they are now stationary.
+
+**Step 3: Regression Analysis for Relative PPP**
+
+If the differenced series are stationary, you can then run a regression of the differenced nominal exchange rate on the differenced relative CPI (difference of home CPI and foreign CPI).
+
+```python
+import statsmodels.api as sm
+
+# Assuming the differenced series are stored as follows:
+diff_nominal_exchange = Master_df['diff_Log_Nominal_Exchange_Rate']
+diff_cpi_relative = Master_df['diff_Log_CPI_Home'] - Master_df['diff_Log_CPI_Foreign']
+
+# Regression for Relative PPP
+X = sm.add_constant(diff_cpi_relative)  # Independent variable
+model = sm.OLS(diff_nominal_exchange, X).fit()  # Dependent variable
+print(model.summary())
+```
+
+The coefficient of `diff_cpi_relative` in the regression model will provide insights into relative PPP. A coefficient significantly different from zero suggests a relationship between the exchange rate changes and relative price changes, thus supporting relative PPP.
+
+**Step 4: Cointegration Test for Absolute PPP**
+
+If after differencing, the ADF test shows the real exchange rate to be stationary, then absolute PPP may not hold in its traditional form. If the series are still non-stationary, you could look into cointegration tests between the levels of the nominal exchange rate and the relative CPI. This will require both series to be I(1).
+
+```python
+from statsmodels.tsa.stattools import coint
+
+# Assuming the original log series are stored as follows:
+log_nominal_exchange = Master_df['Log_Nominal_Exchange_Rate']
+log_cpi_relative = Master_df['Log_CPI_Home'] - Master_df['Log_CPI_Foreign']
+
+coint_t_statistic, p_value, crit_values = coint(log_nominal_exchange, log_cpi_relative)
+```
+
+For both regression and cointegration tests, you should include a constant term (intercept) in the regression equation. A statistically significant relationship (with p-values less than 0.05) would suggest that there is evidence for relative PPP in the differenced data or absolute PPP in the levels of the data if they are cointegrated.
+
+Remember to use the actual column names from your DataFrame `Master_df` when implementing this approach. The results from these tests, combined with economic theory and other empirical evidence, will provide a more comprehensive understanding of PPP's validity for the currencies in question.
