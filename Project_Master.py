@@ -86,5 +86,6 @@ null_counts = Master_df.isnull().sum()
 # This will print the count of null values for each column
 print(null_counts)
 
-Master_df_new = Master_df.fillna(Master_df.mean())  # Fill with mean
+df_new = df.fillna(Master_df.mean())  # Fill with mean
+
 
