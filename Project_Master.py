@@ -76,3 +76,7 @@ for i, var in enumerate(variables, 1):
     adf_test(Master_df[var], title=var)
 
 plt.show()
+
+
+df['diff_log_CPI_foreign'] = df['log_CPI_foreign'].diff().dropna()
+
