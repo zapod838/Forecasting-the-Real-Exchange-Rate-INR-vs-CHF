@@ -80,3 +80,11 @@ plt.show()
 
 df['diff_log_CPI_foreign'] = df['log_CPI_foreign'].diff().dropna()
 
+# Assuming df is your DataFrame
+null_counts = Master_df.isnull().sum()
+
+# This will print the count of null values for each column
+print(null_counts)
+
+Master_df_new = Master_df.fillna(Master_df.mean())  # Fill with mean
+
